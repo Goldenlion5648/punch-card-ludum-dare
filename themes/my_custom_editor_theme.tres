@@ -1,0 +1,4 @@
+[gd_resource type="Theme" format=3 uid="uid://k6nh1k8c2nro"]
+
+[resource]
+SplitContainer/constants/minimum_grab_thickness = 28

@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dy7jxrvrrcved"]
+
+[ext_resource type="Script" uid="uid://bgl2o525dg17w" path="res://objects/sound_controller.gd" id="1_2qr2m"]
+
+[node name="main" type="Node2D" unique_id=196421226]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=505819219]
+anchor_mode = 0
+
+[node name="sound_controller" type="Node2D" parent="." unique_id=1745796307]
+script = ExtResource("1_2qr2m")
+
+[node name="playing_sounds_holder" type="Node2D" parent="sound_controller" unique_id=839571542]
