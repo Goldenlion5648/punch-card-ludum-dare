@@ -1,0 +1,144 @@
+@tool
+extends EditorPlugin
+
+const QUICK_OPEN_POPUP = preload("uid://5w33ey67m5b3")
+var current_spawned_popup: PopupPanel = null
+var current_shortcut_for_quick_search: Shortcut
+var current_shortcut_for_quick_move_up: Shortcut
+var current_shortcut_for_quick_move_down: Shortcut
+var current_shortcut_for_swap_to_processed: Shortcut
+
+var previous_search = ""
+
+func _enable_plugin() -> void:
+    print("loaded plugin")
+    
+    
+func _disable_plugin() -> void:
+    # Remove autoloads here.
+    pass
+
+    
+func show_search_popup():
+    current_spawned_popup = QUICK_OPEN_POPUP.instantiate() as MyQuickSearcher
+    current_spawned_popup.searched_new_string.connect(func(searched):
+        previous_search = searched)
+    current_spawned_popup.prev_search = previous_search
+    current_spawned_popup.popup_exclusive_on_parent(EditorInterface.get_script_editor(), get_top_of_script_editor(Vector2(700, 400)))
+    
+# this is from script-ide
+func get_top_of_script_editor(pref_size: Vector2) -> Rect2i:
+    var script_editor: ScriptEditor = EditorInterface.get_script_editor()
+    var position: Vector2 = script_editor.global_position + Vector2(script_editor.size.x / 2, script_editor.size.y / 3) - pref_size / 2
+    return Rect2i(position, pref_size)
+
+func _enter_tree():
+    add_shortcuts()
+    
+func add_shortcuts():
+    const prefix = "plugin/quicksearch/"
+    const quick_search_shortcut_path = prefix + "search_shortcut"
+    const quick_move_up_shortcut_path = prefix + "quick_move_up"
+    const quick_move_down_shortcut_path = prefix + "quick_move_down"
+    const swap_to_processed_shortcut_path = prefix + "swap_to_processed"
+    var editor_settings: EditorSettings = EditorInterface.get_editor_settings()
+    if not editor_settings.has_setting(quick_search_shortcut_path):
+        var shortcut: Shortcut = Shortcut.new()
+        var event: InputEventKey = InputEventKey.new()
+        event.device = -1
+        event.keycode = KEY_O
+        event.ctrl_pressed = true
+        shortcut.events = [ event ]
+        editor_settings.set_setting(quick_search_shortcut_path, shortcut)
+    if not editor_settings.has_setting(quick_move_up_shortcut_path):
+        var shortcut: Shortcut = Shortcut.new()
+        var event: InputEventKey = InputEventKey.new()
+        event.device = -1
+        event.keycode = KEY_UP
+        event.ctrl_pressed = true
+        shortcut.events = [ event ]
+        editor_settings.set_setting(quick_move_up_shortcut_path, shortcut)
+    if not editor_settings.has_setting(quick_move_down_shortcut_path):
+        var shortcut: Shortcut = Shortcut.new()
+        var event: InputEventKey = InputEventKey.new()
+        event.device = -1
+        event.keycode = KEY_DOWN
+        event.ctrl_pressed = true
+        shortcut.events = [ event ]
+        editor_settings.set_setting(quick_move_down_shortcut_path, shortcut)
+    if not editor_settings.has_setting(swap_to_processed_shortcut_path):
+        var shortcut: Shortcut = Shortcut.new()
+        var event: InputEventKey = InputEventKey.new()
+        event.device = -1
+        event.keycode = KEY_X
+        event.alt_pressed = true
+        shortcut.events = [ event ]
+        editor_settings.set_setting(swap_to_processed_shortcut_path, shortcut)
+    current_shortcut_for_quick_search = editor_settings.get_setting(quick_search_shortcut_path)
+    current_shortcut_for_quick_move_up = editor_settings.get_setting(quick_move_up_shortcut_path)
+    current_shortcut_for_quick_move_down = editor_settings.get_setting(quick_move_down_shortcut_path)
+    current_shortcut_for_swap_to_processed = editor_settings.get_setting(swap_to_processed_shortcut_path)
+
+#func _input(event: InputEvent) -> void:
+    #print(event)
+
+func _shortcut_input(event: InputEvent) -> void:
+    #if not event.is_pressed() or event.is_echo():
+        #return
+    #if current_shortcut_for_quick_search.matches_event(event):
+    if event.is_match(current_shortcut_for_quick_search.events[0], true):
+        get_viewport().set_input_as_handled()
+        show_search_popup()
+        #
+        #
+    if current_shortcut_for_quick_move_up.matches_event(event):
+        #print("did quick move up")
+        var godot_main_code_edit = (EditorInterface.get_script_editor().get_current_editor().get_base_editor() as CodeEdit)
+        var line_before = godot_main_code_edit.get_caret_line()
+        godot_main_code_edit.set_caret_line(max(0, line_before - 5))
+        get_viewport().set_input_as_handled()
+    if current_shortcut_for_quick_move_down.matches_event(event):
+        var godot_main_code_edit = (EditorInterface.get_script_editor().get_current_editor().get_base_editor() as CodeEdit)
+        var line_before = godot_main_code_edit.get_caret_line()
+        godot_main_code_edit.set_caret_line(min(line_before + 5, godot_main_code_edit.get_line_count()))
+        get_viewport().set_input_as_handled()
+    if current_shortcut_for_swap_to_processed.matches_event(event) and not event.is_echo() and event.is_pressed():
+        var current_file_path = (EditorInterface.get_script_editor().get_current_script()).resource_path
+        #prints("cur_script_path", cur_script_path)
+        get_viewport().set_input_as_handled()
+        var backup_path = current_file_path + ".backup"
+        var starting_text = FileAccess.open(current_file_path, FileAccess.READ).get_as_text()
+        print(starting_text)
+        var lines = starting_text.split("\n")
+        var last_lines = lines[-3] + lines[-2] + lines[-1]
+        print("last_lines", last_lines)
+        # They were already viewing the processed content.
+        if last_lines.rfind("##THIS WAS AUTO GENERATED") != -1:
+            print("inner")
+            if FileAccess.file_exists(backup_path):
+                # Restore the original.
+                DirAccess.copy_absolute(backup_path, current_file_path)
+                prints("top path", backup_path, current_file_path)
+        else:
+            # They started with the code before processing, so backup first.
+            var err2 = DirAccess.copy_absolute(current_file_path, backup_path)
+            print(err2)
+            prints("bottom path", current_file_path, backup_path)
+            
+            # Load the processed version.
+            var processed_path = current_file_path + ".processed"
+            print("processed_path", processed_path)
+            if FileAccess.file_exists(processed_path):
+                var err = DirAccess.copy_absolute(processed_path, current_file_path)
+                print(err)
+        var res: Resource = load(current_file_path)
+        #EditorInterface.edit_script(res, 1, 1)
+        #(EditorInterface.get_script_editor().get_current_script()).reload(true)
+        #var line_before = godot_main_code_edit.resoux
+        
+
+
+func _exit_tree() -> void:
+    if current_spawned_popup:
+        current_spawned_popup.queue_free()
+        print("freed")

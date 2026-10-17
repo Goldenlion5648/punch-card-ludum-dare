@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dblij8pytyn62"]
+
+[node name="punch_card_label" type="Label3D" unique_id=1374020120]
+transform = Transform3D(-4.371139e-08, 1, 4.371139e-08, 0, -4.371139e-08, 1, 1, 4.371139e-08, 1.9106855e-15, 0, 0, 0)
+text = "A"
+font_size = 256
+outline_size = 36

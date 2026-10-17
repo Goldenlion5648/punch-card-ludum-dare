@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://btbqy2uilikeh"]
+
+[ext_resource type="Script" uid="uid://cuk182wp08irv" path="res://addons/quick_search/single_section_container.gd" id="1_l5mr8"]
+
+[node name="single_section_container" type="VBoxContainer" unique_id=484629231]
+custom_maximum_size = Vector2(-1, 120)
+offset_right = 1.0
+offset_bottom = 30.0
+size_flags_vertical = 3
+script = ExtResource("1_l5mr8")
+
+[node name="file_name_label" type="RichTextLabel" parent="." unique_id=1837867898]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+bbcode_enabled = true
+text = "some file"

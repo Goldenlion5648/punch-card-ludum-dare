@@ -4,16 +4,16 @@ extends RefCounted
 const CONFIG_PATH := "res://addons/limbo_console.cfg"
 
 @export var aliases := {
-	"exit": "quit",
-	"source": "exec",
-	"usage": "help",
+    "exit": "quit",
+    "source": "exec",
+    "usage": "help",
 }
 @export var disable_in_release_build: bool = false
 @export var print_to_stdout: bool = false
 @export var pause_when_open: bool = true
 
 @export var commands_disabled_in_release: Array = [
-	"eval" # enables arbitrary code execution and asset extraction in the running game.
+    "eval" # enables arbitrary code execution and asset extraction in the running game.
 ]
 
 @export_category("appearance")

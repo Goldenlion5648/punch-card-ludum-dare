@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://byp6krnmnrkvi"]
+
+[ext_resource type="Script" uid="uid://cqqnm824w7cgi" path="res://objects/punch_card.gd" id="1_qi04t"]
+[ext_resource type="Texture2D" uid="uid://djmkpdil0ti45" path="res://extra_files/grid.png" id="2_w2p4f"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wr7w0"]
+albedo_texture = ExtResource("2_w2p4f")
+
+[node name="punch_card" type="Node3D" unique_id=1308335828]
+script = ExtResource("1_qi04t")
+
+[node name="board" type="CSGBox3D" parent="." unique_id=183470897]
+material_overlay = SubResource("StandardMaterial3D_wr7w0")
+size = Vector3(12, 0.032, 6)

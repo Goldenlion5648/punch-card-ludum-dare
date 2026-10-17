@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dg5asvkj71sk0"]
+
+[ext_resource type="PackedScene" uid="uid://byp6krnmnrkvi" path="res://objects/punch_card.tscn" id="1_8nlhw"]
+
+[node name="main3d" type="Node3D" unique_id=2097318506]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=125228190]
+transform = Transform3D(8.2191305e-05, 0.90356404, -0.42845315, -4.7540783e-05, 0.42845312, 0.9035641, 1, -5.3896114e-05, 7.817127e-05, -4.234621, 7.539361, -0.80149555)
+
+[node name="punch_card" parent="." unique_id=1308335828 instance=ExtResource("1_8nlhw")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1302828731]
+transform = Transform3D(1, 0, 0, 0, 0.45556638, 0.89020187, 0, -0.89020187, 0.45556638, 0, 5.9439096, 3.4147573)

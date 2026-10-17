@@ -17,9 +17,5 @@ func dupe_and_play(some_sound : AudioStreamPlayer2D):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-    if Input.is_action_just_pressed("quit"):
-        get_tree().quit()
-    if Input.is_action_just_pressed("reload_scene"):
-        get_tree().reload_current_scene()
-        
+    pass        
     

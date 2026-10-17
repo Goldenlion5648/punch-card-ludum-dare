@@ -17,6 +17,15 @@ func remove_and_queue_free(to_remove: Node):
 func get_random_color():
     return Color(randf(), randf(), randf())
     
+func read_file(path):
+    return FileAccess.open(path, FileAccess.READ).get_as_text()
+    
+func is_running_in_web():
+    return OS.has_feature("webgl")
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-    pass
+    if OS.has_feature("editor"):
+        if Input.is_action_just_pressed("quit"):
+            get_tree().quit()
+        if Input.is_action_just_pressed("reload_scene"):
+            get_tree().reload_current_scene()

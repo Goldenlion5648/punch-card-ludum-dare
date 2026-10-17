@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://csowm63k0r6dc"]
+
+[ext_resource type="Script" uid="uid://s6noxhlvvclp" path="res://addons/quick_search/single_quick_open_result.gd" id="1_foe2h"]
+
+[node name="single_quick_open_result" type="RichTextLabel" unique_id=1246141709]
+custom_minimum_size = Vector2(0, 30)
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/bold_font_size = 20
+theme_override_font_sizes/bold_italics_font_size = 20
+theme_override_font_sizes/italics_font_size = 20
+theme_override_font_sizes/mono_font_size = 20
+bbcode_enabled = true
+text = "test"
+script = ExtResource("1_foe2h")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1091705914]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.3019608, 0.5764706, 0.9372549, 0.49019608)

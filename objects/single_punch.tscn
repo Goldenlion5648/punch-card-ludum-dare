@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cjdkjr7547vmk"]
+
+[node name="single_punch" type="CSGSphere3D" unique_id=1450176870]
+autosmooth = true
+smoothing_angle = 133.6
+operation = 2
+radius = 0.4

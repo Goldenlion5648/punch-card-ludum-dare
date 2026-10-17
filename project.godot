@@ -14,8 +14,8 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 [application]
 
-config/name="template"
-run/main_scene="uid://dy7jxrvrrcved"
+config/name="old_tech_ludum_dare"
+run/main_scene="uid://dg5asvkj71sk0"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -28,10 +28,11 @@ EventBus="*uid://b4i5rsaoq3f1r"
 [display]
 
 window/energy_saving/keep_screen_on=false
+window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/limbo_console/plugin.cfg", "res://addons/script-ide/plugin.cfg")
+enabled=PackedStringArray("res://addons/limbo_console/plugin.cfg", "res://addons/quick_search/plugin.cfg", "res://addons/script-ide/plugin.cfg")
 
 [input]
 
