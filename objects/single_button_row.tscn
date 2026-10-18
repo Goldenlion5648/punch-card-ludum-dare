@@ -1,28 +1,32 @@
 [gd_scene format=3 uid="uid://c7ofg6pwql4vg"]
 
-[node name="single_row" type="HBoxContainer" unique_id=927797331]
+[ext_resource type="Script" uid="uid://lvd14ic4ktv8" path="res://objects/row_background.gd" id="1_7yegf"]
+[ext_resource type="PackedScene" uid="uid://bscashwp316mq" path="res://objects/single_button.tscn" id="1_yg4tj"]
+
+[node name="row_background" type="ColorRect" unique_id=1755261659]
+custom_minimum_size = Vector2(0, 80)
+offset_left = 368.0
+offset_right = 368.0
+offset_bottom = 80.0
+color = Color(0.6745098, 0.6745098, 0.6745098, 0.3882353)
+script = ExtResource("1_7yegf")
+
+[node name="items_holder" type="HBoxContainer" parent="." unique_id=927797331]
+layout_mode = 0
 theme_override_constants/separation = 12
 
-[node name="single_button" type="CheckButton" parent="." unique_id=2092869162]
-custom_minimum_size = Vector2(80, 80)
-custom_maximum_size = Vector2(80, 80)
+[node name="single_button" parent="items_holder" unique_id=1507941903 instance=ExtResource("1_yg4tj")]
 layout_mode = 2
-focus_mode = 0
+mouse_filter = 1
 
-[node name="single_button2" type="CheckButton" parent="." unique_id=372737534]
-custom_minimum_size = Vector2(80, 80)
-custom_maximum_size = Vector2(80, 80)
+[node name="single_button2" parent="items_holder" unique_id=158595935 instance=ExtResource("1_yg4tj")]
 layout_mode = 2
-focus_mode = 0
+mouse_filter = 1
 
-[node name="single_button3" type="CheckButton" parent="." unique_id=189248742]
-custom_minimum_size = Vector2(80, 80)
-custom_maximum_size = Vector2(80, 80)
+[node name="single_button3" parent="items_holder" unique_id=168805852 instance=ExtResource("1_yg4tj")]
 layout_mode = 2
-focus_mode = 0
+mouse_filter = 1
 
-[node name="single_button4" type="CheckButton" parent="." unique_id=1114320056]
-custom_minimum_size = Vector2(80, 80)
-custom_maximum_size = Vector2(80, 80)
+[node name="single_button4" parent="items_holder" unique_id=1045978751 instance=ExtResource("1_yg4tj")]
 layout_mode = 2
-focus_mode = 0
+mouse_filter = 1

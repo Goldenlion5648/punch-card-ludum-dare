@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bscashwp316mq"]
+
+[ext_resource type="Script" uid="uid://cnkprxb8kctgu" path="res://objects/single_button.gd" id="1_5xg41"]
+[ext_resource type="AudioStream" uid="uid://b04mrjv1r61l0" path="res://audio/key_typing.wav" id="2_ieqvu"]
+[ext_resource type="AudioStream" uid="uid://dd0q23i4hs74g" path="res://audio/key_type2.wav" id="3_6wonw"]
+[ext_resource type="AudioStream" uid="uid://biwmhqc167egs" path="res://audio/key_type3.wav" id="4_ya8pl"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_kd0gh"]
+random_pitch = 1.1752763
+random_volume_offset_db = 2.46
+streams_count = 3
+stream_0/stream = ExtResource("2_ieqvu")
+stream_1/stream = ExtResource("3_6wonw")
+stream_2/stream = ExtResource("4_ya8pl")
+
+[node name="single_button" type="CheckButton" unique_id=1507941903]
+custom_minimum_size = Vector2(80, 80)
+custom_maximum_size = Vector2(80, 80)
+focus_mode = 0
+script = ExtResource("1_5xg41")
+
+[node name="button_sound" type="AudioStreamPlayer2D" parent="." unique_id=1425046235]
+position = Vector2(0, -1)
+stream = SubResource("AudioStreamRandomizer_kd0gh")
+max_polyphony = 4
+bus = &"sound_fx"

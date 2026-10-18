@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://droiodh1dyifc"]
+
+[ext_resource type="Texture2D" uid="uid://djmkpdil0ti45" path="res://textures/grid.png" id="1_kgbvf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ruu3w"]
+albedo_texture = ExtResource("1_kgbvf")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_uf7ms"]
+material = SubResource("StandardMaterial3D_ruu3w")
+height = 0.2
+
+[sub_resource type="Curve" id="Curve_s4sp0"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, 110.14612), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_gymq6"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 335.9294), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="circle_particle" type="CPUParticles3D" unique_id=1703144284]
+transform = Transform3D(0.8432428, -0.052910164, 0.5349224, 0.17101006, 0.96984625, -0.17364818, -0.5096048, 0.2379047, 0.8268641, 0, 0, 0)
+amount = 1
+lifetime = 0.83
+randomness = 0.4
+mesh = SubResource("CylinderMesh_uf7ms")
+emission_shape = 1
+emission_sphere_radius = 1.0
+particle_flag_rotate_y = true
+direction = Vector3(0, 1, 0)
+spread = 19.82
+gravity = Vector3(1, 9, 1)
+initial_velocity_min = 2.0
+initial_velocity_max = 2.0
+linear_accel_curve = SubResource("Curve_s4sp0")
+radial_accel_min = 2.0
+radial_accel_max = 3.0
+tangential_accel_max = 12.83
+angle_min = -15.9
+angle_max = 79.5
+angle_curve = SubResource("Curve_gymq6")
