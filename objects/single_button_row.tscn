@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://c7ofg6pwql4vg"]
+
+[node name="single_row" type="HBoxContainer" unique_id=927797331]
+theme_override_constants/separation = 12
+
+[node name="single_button" type="CheckButton" parent="." unique_id=2092869162]
+custom_minimum_size = Vector2(80, 80)
+custom_maximum_size = Vector2(80, 80)
+layout_mode = 2
+focus_mode = 0
+
+[node name="single_button2" type="CheckButton" parent="." unique_id=372737534]
+custom_minimum_size = Vector2(80, 80)
+custom_maximum_size = Vector2(80, 80)
+layout_mode = 2
+focus_mode = 0
+
+[node name="single_button3" type="CheckButton" parent="." unique_id=189248742]
+custom_minimum_size = Vector2(80, 80)
+custom_maximum_size = Vector2(80, 80)
+layout_mode = 2
+focus_mode = 0
+
+[node name="single_button4" type="CheckButton" parent="." unique_id=1114320056]
+custom_minimum_size = Vector2(80, 80)
+custom_maximum_size = Vector2(80, 80)
+layout_mode = 2
+focus_mode = 0

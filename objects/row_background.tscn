@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://fscb7kg4pr5t"]
+
+[ext_resource type="Script" uid="uid://lvd14ic4ktv8" path="res://objects/row_background.gd" id="1_5lc2s"]
+
+[node name="row_background" type="ColorRect" unique_id=1755261659]
+custom_minimum_size = Vector2(0, 80)
+color = Color(0.6745098, 0.6745098, 0.6745098, 0.3882353)
+script = ExtResource("1_5lc2s")

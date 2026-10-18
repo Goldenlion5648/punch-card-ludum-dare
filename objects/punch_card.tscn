@@ -1,10 +1,32 @@
 [gd_scene format=3 uid="uid://byp6krnmnrkvi"]
 
 [ext_resource type="Script" uid="uid://cqqnm824w7cgi" path="res://objects/punch_card.gd" id="1_qi04t"]
-[ext_resource type="Texture2D" uid="uid://djmkpdil0ti45" path="res://extra_files/grid.png" id="2_w2p4f"]
+[ext_resource type="Texture2D" uid="uid://djmkpdil0ti45" path="res://textures/grid.png" id="2_w2p4f"]
+[ext_resource type="AudioStream" uid="uid://bb786vrtp7gpw" path="res://audio/multi_punch1.wav" id="3_hx3d1"]
+[ext_resource type="AudioStream" uid="uid://d1arn4lwspp45" path="res://audio/hole_punch1.wav" id="3_q4dpm"]
+[ext_resource type="AudioStream" uid="uid://cunut84com0cm" path="res://audio/hole_punch2.wav" id="4_2hnni"]
+[ext_resource type="AudioStream" uid="uid://daxd1wfnpavkp" path="res://audio/multi_punch2.wav" id="4_q4dpm"]
+[ext_resource type="AudioStream" uid="uid://1vdpr1ql68xh" path="res://audio/paper_move3.wav" id="5_m26mn"]
+[ext_resource type="AudioStream" uid="uid://c5yxs6230ce1m" path="res://audio/multi3.wav" id="8_s4sp0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wr7w0"]
 albedo_texture = ExtResource("2_w2p4f")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hx3d1"]
+random_pitch = 1.2971393
+random_volume_offset_db = 2.1
+streams_count = 3
+stream_0/stream = ExtResource("3_q4dpm")
+stream_1/stream = ExtResource("4_2hnni")
+stream_2/stream = ExtResource("5_m26mn")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_uf7ms"]
+random_pitch = 1.1915449
+random_volume_offset_db = 2.72
+streams_count = 3
+stream_0/stream = ExtResource("3_hx3d1")
+stream_1/stream = ExtResource("4_q4dpm")
+stream_2/stream = ExtResource("8_s4sp0")
 
 [node name="punch_card" type="Node3D" unique_id=1308335828]
 script = ExtResource("1_qi04t")
@@ -12,3 +34,15 @@ script = ExtResource("1_qi04t")
 [node name="board" type="CSGBox3D" parent="." unique_id=183470897]
 material_overlay = SubResource("StandardMaterial3D_wr7w0")
 size = Vector3(12, 0.032, 6)
+
+[node name="audio_holder" type="Node3D" parent="." unique_id=303080068]
+
+[node name="hole_punch" type="AudioStreamPlayer3D" parent="audio_holder" unique_id=203966698]
+stream = SubResource("AudioStreamRandomizer_hx3d1")
+max_polyphony = 5
+bus = &"sound_fx"
+
+[node name="multi_punch" type="AudioStreamPlayer3D" parent="audio_holder" unique_id=888582817]
+stream = SubResource("AudioStreamRandomizer_uf7ms")
+max_polyphony = 5
+bus = &"sound_fx"

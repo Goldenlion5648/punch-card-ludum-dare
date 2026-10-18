@@ -1,13 +1,95 @@
 [gd_scene format=3 uid="uid://dg5asvkj71sk0"]
 
 [ext_resource type="PackedScene" uid="uid://byp6krnmnrkvi" path="res://objects/punch_card.tscn" id="1_8nlhw"]
+[ext_resource type="Script" uid="uid://8pg0g307x8ug" path="res://objects/game_controller.gd" id="1_bhxch"]
+[ext_resource type="AudioStream" uid="uid://b04mrjv1r61l0" path="res://audio/key_typing.wav" id="2_e8nq1"]
+[ext_resource type="Script" uid="uid://dc5x2cj43bb06" path="res://objects/controls_overlay.gd" id="2_jh6lj"]
+[ext_resource type="AudioStream" uid="uid://dd0q23i4hs74g" path="res://audio/key_type2.wav" id="3_jh6lj"]
+[ext_resource type="PackedScene" uid="uid://c7ofg6pwql4vg" path="res://objects/single_button_row.tscn" id="4_7hks4"]
+[ext_resource type="AudioStream" uid="uid://biwmhqc167egs" path="res://audio/key_type3.wav" id="4_bhxch"]
+[ext_resource type="PackedScene" uid="uid://fscb7kg4pr5t" path="res://objects/row_background.tscn" id="4_dv41q"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_uf7ms"]
+random_pitch = 1.1752763
+random_volume_offset_db = 2.46
+streams_count = 3
+stream_0/stream = ExtResource("2_e8nq1")
+stream_1/stream = ExtResource("3_jh6lj")
+stream_2/stream = ExtResource("4_bhxch")
 
 [node name="main3d" type="Node3D" unique_id=2097318506]
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=125228190]
-transform = Transform3D(8.2191305e-05, 0.90356404, -0.42845315, -4.7540783e-05, 0.42845312, 0.9035641, 1, -5.3896114e-05, 7.817127e-05, -4.234621, 7.539361, -0.80149555)
-
-[node name="punch_card" parent="." unique_id=1308335828 instance=ExtResource("1_8nlhw")]
+transform = Transform3D(8.2191305e-05, 0.90356404, -0.42845315, -4.7540783e-05, 0.42845312, 0.9035641, 1, -5.3896114e-05, 7.8171266e-05, -0.34323978, 8.32593, -3.4127684)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1302828731]
 transform = Transform3D(1, 0, 0, 0, 0.45556638, 0.89020187, 0, -0.89020187, 0.45556638, 0, 5.9439096, 3.4147573)
+
+[node name="game_controller" type="Node3D" parent="." unique_id=1560113110]
+script = ExtResource("1_bhxch")
+
+[node name="punch_card" parent="game_controller" unique_id=1308335828 instance=ExtResource("1_8nlhw")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4647579, 0, 0)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="game_controller" unique_id=273922626]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -272.0
+offset_right = 264.0
+grow_vertical = 0
+
+[node name="SubViewport" type="SubViewport" parent="game_controller/SubViewportContainer" unique_id=163487573]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(200, 256)
+render_target_update_mode = 4
+
+[node name="goal_preview" type="Node3D" parent="game_controller/SubViewportContainer/SubViewport" unique_id=1392075473]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="game_controller/SubViewportContainer/SubViewport/goal_preview" unique_id=1459390753]
+transform = Transform3D(-4.371139e-08, 1, 4.371139e-08, 0, -4.371139e-08, 1, 1, 4.371139e-08, 1.9106855e-15, 0, 8.221423, 0)
+
+[node name="goal_punch_card" parent="game_controller/SubViewportContainer/SubViewport/goal_preview" unique_id=301558988 instance=ExtResource("1_8nlhw")]
+unique_name_in_owner = true
+
+[node name="controls_overlay" type="CanvasLayer" parent="game_controller" unique_id=1991506147]
+script = ExtResource("2_jh6lj")
+
+[node name="row_backgrounds" type="VBoxContainer" parent="game_controller/controls_overlay" unique_id=1260562477]
+process_priority = -1
+offset_left = 33.0
+offset_top = 24.0
+offset_right = 389.0
+offset_bottom = 104.0
+
+[node name="row_background" parent="game_controller/controls_overlay/row_backgrounds" unique_id=1755261659 instance=ExtResource("4_dv41q")]
+layout_mode = 2
+
+[node name="row_holder" type="VBoxContainer" parent="game_controller/controls_overlay" unique_id=1014065882]
+offset_left = 33.0
+offset_top = 24.0
+offset_right = 389.0
+offset_bottom = 104.0
+
+[node name="single_row" parent="game_controller/controls_overlay/row_holder" unique_id=927797331 instance=ExtResource("4_7hks4")]
+layout_mode = 2
+
+[node name="add_row_button" type="Button" parent="game_controller/controls_overlay/row_holder/single_row" unique_id=1053112440]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 32
+text = "+Row "
+
+[node name="audio_holder" type="Node2D" parent="game_controller/controls_overlay" unique_id=769344188]
+
+[node name="button_sound" type="AudioStreamPlayer2D" parent="game_controller/controls_overlay/audio_holder" unique_id=1752400295]
+position = Vector2(0, -1)
+stream = SubResource("AudioStreamRandomizer_uf7ms")
+max_polyphony = 4
+
+[connection signal="pressed" from="game_controller/controls_overlay/row_holder/single_row/add_row_button" to="game_controller/controls_overlay" method="_on_add_row_button_pressed"]

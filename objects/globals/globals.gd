@@ -1,5 +1,7 @@
 extends Node
 
+var column_count = 4
+var row_count = 8
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
